@@ -13,7 +13,12 @@ pipeline {
     stage('Run python') {
       steps {
         sh 'python3 --version'
-        sh 'python3 main.py'
+        sh 'python3 main.py > output.txt'
+      }
+    }
+    stage('Archive') {
+      steps {
+        archiveArtifacts artifacts: 'output.txt', fingerprint: true
       }
     }
   }
