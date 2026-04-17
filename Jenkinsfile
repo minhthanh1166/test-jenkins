@@ -26,7 +26,9 @@ pipeline {
     }
     stage('Deploy') {
         steps {
-            withCredentials([sshUserPrivateKey(credentialsId: 'ssh-server', keyFileVariable: 'SSH_KEY')]) {
+            withCredentials([sshUserPrivateKey(credentialsId: 'ssh-server', keyFileVariable: 'SSH_KEY'),
+                            usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS'),
+                            ]) {
                 sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SERVER "
                         docker pull $IMAGE_NAME:$TAG &&
@@ -38,7 +40,8 @@ pipeline {
             }
         }
     }
-    post {
+  }
+  post {
       success {
         echo 'Thanh cong'
       }
@@ -46,8 +49,7 @@ pipeline {
         echo 'That bai'
       }
       always {
-        echo 'run all that bai and thanh cong'
+        echo 'Run all that bai and thanh cong'
       }
     }
-  }
 }
