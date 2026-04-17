@@ -2,11 +2,6 @@ pipeline {
   agent: any 
 
   stages {
-    stage('Checkout') {
-      steps {
-        branch: 'main', url: 'https://github.com/minhthanh1166/test-jenkins.git'
-      }
-    }
     stage('Run dir') {
       steps {
         sh 'uname -a'
