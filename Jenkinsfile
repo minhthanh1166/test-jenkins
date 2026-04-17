@@ -9,9 +9,11 @@ pipeline {
   stages {
     stage('Build Image') {
       steps {
+        sh '''
         docker buildx create --use --name mybuilder || true
         docker buildx inspect --bootstrap
         docker buildx build --platform linux/amd64 -t $IMAGE_NAME:$TAG --load .
+        '''
       }
     }
     stage('Docker Login') {
