@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Run Container') {
       steps {
-        sh 'docker run -rm demo-jenkins:latest'
+        sh 'docker run --rm demo-jenkins:latest'
       }
     }
   }
