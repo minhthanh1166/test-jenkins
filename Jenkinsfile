@@ -2,23 +2,14 @@ pipeline {
   agent any 
 
   stages {
-    stage('Run dir') {
+    stage('Build Docker Image') {
       steps {
-        sh 'uname -a'
-        sh 'whoami'
-        sh 'pwd'
-        sh 'ls -la'
+        sh 'docker build -t demo-jenkins:latest .'
       }
     }
-    stage('Run python') {
+    stage('Run Container') {
       steps {
-        sh 'python3 --version'
-        sh 'python3 main.py > output.txt'
-      }
-    }
-    stage('Archive') {
-      steps {
-        archiveArtifacts artifacts: 'output.txt', fingerprint: true
+        sh 'docker run -rm demo-jenkins:latest'
       }
     }
   }
