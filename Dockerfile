@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKER /app
+WORKDIR /app
 
 COPY main.py .
 
