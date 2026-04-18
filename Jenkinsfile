@@ -10,11 +10,9 @@ pipeline {
   stages {
     stage('Build Image') {
       steps {
-        sh '''
-        docker buildx create --use --name mybuilder || true
-        docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64 -t minhthanh1166/demo-jenkins:${env.BUILD_NUMBER} -t minhthanh1166/demo-jenkins:latest --load
-        '''
+        sh 'docker buildx create --use --name mybuilder || true'
+        sh 'docker buildx inspect --bootstrap'
+        sh "docker buildx build --platform linux/amd64 -t ${env.IMAGE_NAME}:${env.BUILD_NUMBER} -t ${env.IMAGE_NAME}:latest --load ."
       }
     }
 
