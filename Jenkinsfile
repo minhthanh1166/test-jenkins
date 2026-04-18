@@ -44,7 +44,7 @@ pipeline {
               docker pull $IMAGE_NAME:$TAG &&
               (docker stop demo || true) &&
               (docker rm demo || true) &&
-              docker run -d --name demo $IMAGE_NAME:$TAG
+              docker run -d --name demo -p 5000:5000 $IMAGE_NAME:$TAG
             "
           '''
         }
