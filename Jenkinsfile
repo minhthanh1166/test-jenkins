@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     IMAGE_NAME = 'minhthanh1166/demo-jenkins'
-    TAG = '$BUILD_NUMBER'
+    TAG = '${BUILD_NUMBER}'
     SERVER = 'ubt@10.9.30.101'
   }
 
