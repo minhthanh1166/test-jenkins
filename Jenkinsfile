@@ -43,8 +43,8 @@ pipeline {
               (docker stop demo || true) &&
               (docker rm demo || true) &&
               docker run -d --name demo -p 5000:5000 $IMAGE_NAME:$TAG &&
-              docker ps 
-              docker ps -a
+              docker ps &&
+              docker ps -a 
             "
           '''
         }
